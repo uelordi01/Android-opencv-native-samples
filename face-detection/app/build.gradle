@@ -15,9 +15,6 @@ android {
                 cppFlags "-std=c++11 -frtti -fexceptions"
                 arguments "-DOpenCV_DIR=" + getOpenCVDir().toString()+"/sdk/native/jni",
                         "-DANDROID_ARM_NEON=TRUE"
-
-
-
             }
         }
     }
