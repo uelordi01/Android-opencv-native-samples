@@ -1,0 +1,57 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "26.0.0"
+    defaultConfig {
+        applicationId "org.opencv.samples.captureonly"
+        minSdkVersion 21
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        externalNativeBuild {
+            cmake {
+                arguments "-DOpenCV_DIR=" + getOpenCVDir().toString()+"/sdk/native/jni",
+                        "-DANDROID_ARM_NEON=TRUE"
+                cppFlags "-std=c++11 -frtti -fexceptions"
+            }
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt"
+        }
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs =[getOpenCVDir().toString()+"/sdk/native/libs"]
+        }
+    }
+}
+def getOpenCVDir() {
+    Properties properties = new Properties()
+    properties.load(new File(rootDir.absolutePath + "/local.properties").newDataInputStream())
+    def externalModuleDir = properties.getProperty('opencv.dir', null)
+    if (externalModuleDir == null) {
+        throw new GradleException(
+                "OpenCV location not found. Define location with opencv.dir in the local.properties file!")
+    }
+    return externalModuleDir
+}
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.github.uelordi01:Opencv-Android-3.3-gradle:1.1'
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    testCompile 'junit:junit:4.12'
+}

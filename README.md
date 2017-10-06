@@ -9,7 +9,7 @@ OpenCV repository samples with cmake and lldb  integration for latest android st
 
 ## How to install:
 * clone the repository
-```
+```javascript
 git clone https://github.com/uelordi01/Android-opencv-native-samples.git
 ```
 * *file->open->project* in android studio
@@ -17,7 +17,7 @@ git clone https://github.com/uelordi01/Android-opencv-native-samples.git
 ```
 ndk.dir=/home/your_user/android-sdk/ndk-bundle
 sdk.dir=/home/user/android-sdk
-```
+```javascript
 So add this line in local.properties:
 
 ```
