@@ -6,8 +6,7 @@ add_library( # Sets the name of the library.
              SHARED
              src/main/cpp/native-lib.h
              src/main/cpp/native-lib.cpp
-             src/main/cpp/fps.h
-             src/main/cpp/fps.cpp)
+             src/main/cpp/fps.h)
 
 find_library( # Sets the name of the path variable.
               log-lib
